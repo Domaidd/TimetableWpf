@@ -1,0 +1,92 @@
+﻿<Window
+    x:Class="TimetableWpf.DataView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TimetableWpf"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="DataView"
+    SizeToContent="WidthAndHeight"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Grid>
+        <StackPanel>
+            <TabControl>
+                <TabItem Header="Уровни">
+                    <ToolBar>
+                        <Button Content="Уровни:" IsEnabled="False" />
+                        <Button Command="{Binding OpenAddDialog}" Content="Добавить" />
+                        <Button Command="{Binding OpenChangeDialog}" Content="Редактировать" />
+                        <Button Content="Удалить" />
+                    </ToolBar>
+                </TabItem>
+                <TabItem Header="Предметы">
+                    <ToolBar>
+                        <Button Content="Предметы:" IsEnabled="False" />
+                        <Button Content="Добавить" />
+                        <Button Content="Редактировать" />
+                        <Button Content="Удалить" />
+                    </ToolBar>
+                </TabItem>
+                <TabItem Header="Профили">
+                    <ToolBar>
+                        <Button Content="Профили:" IsEnabled="False" />
+                        <Button Content="Добавить" />
+                        <Button Content="Редактировать" />
+                        <Button Content="Удалить" />
+                    </ToolBar>
+                </TabItem>
+                <TabItem Header="Звонки">
+                    <ToolBar>
+                        <Button Content="Звонки:" IsEnabled="False" />
+                        <Button Content="Добавить" />
+                        <Button Content="Редактировать" />
+                        <Button Content="Удалить" />
+                    </ToolBar>
+                </TabItem>
+                <TabItem Header="Графики">
+                    <ToolBar>
+                        <Button Content="Графики:" IsEnabled="False" />
+                        <Button Content="Добавить" />
+                        <Button Content="Редактировать" />
+                        <Button Content="Удалить" />
+                    </ToolBar>
+                </TabItem>
+                <TabItem Header="Изменения">
+                    <ToolBar>
+                        <Button Content="Изменения:" IsEnabled="False" />
+                        <Button Content="Добавить" />
+                        <Button Content="Редактировать" />
+                        <Button Content="Удалить" />
+                    </ToolBar>
+                </TabItem>
+                <TabItem Header="Корпуса">
+                    <ToolBar>
+                        <Button Content="Корпуса:" IsEnabled="False" />
+                        <Button Content="Добавить" />
+                        <Button Content="Редактировать" />
+                        <Button Content="Удалить" />
+                    </ToolBar>
+                </TabItem>
+            </TabControl>
+            <ListView ItemsSource="{Binding Subjects}" SelectedItem="{Binding SelectedSubject, UpdateSourceTrigger=PropertyChanged}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Name}">
+                            <GridViewColumnHeader
+                                Command="{Binding SortSubject}"
+                                CommandParameter="Name"
+                                Content="Предмет" />
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding HoursPerWeek}">
+                            <GridViewColumnHeader Content="Часов в неделю" />
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding HoursPerDay}">
+                            <GridViewColumnHeader Content="Часов в день" />
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Window>

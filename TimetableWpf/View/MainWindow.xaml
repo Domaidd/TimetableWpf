@@ -9,6 +9,7 @@
     d:DesignHeight="521.5"
     d:DesignWidth="1164.5"
     SizeToContent="WidthAndHeight"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
         <StackPanel>
@@ -20,6 +21,16 @@
                         <MenuItem Header="Сохранить" />
                         <Separator />
                         <MenuItem Header="Выход" />
+                    </MenuItem>
+                    <MenuItem Header="Данные">
+                        <MenuItem Command="{Binding OpenDataView}" Header="Уровни" />
+                        <MenuItem Header="Классы" />
+                        <MenuItem Header="Преподователи" />
+                        <MenuItem Header="Профели" />
+                        <MenuItem Header="Звонки" />
+                        <MenuItem Header="Графики" />
+                        <MenuItem Header="Изменения" />
+                        <MenuItem Header="Корпуса" />
                     </MenuItem>
                 </Menu>
             </Grid>

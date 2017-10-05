@@ -13,5 +13,17 @@ namespace TimetableWpf
     /// </summary>
     public partial class App : Application
     {
+        private MainWindow mainWindow;
+        private MainViewViewModel mainViewViewModel;
+
+        private void AppStartup(object sender, StartupEventArgs e)
+        {
+            mainViewViewModel = new MainViewViewModel();
+            mainWindow = new MainWindow
+            {
+                DataContext = mainViewViewModel
+            };
+            mainWindow.Show();
+        }
     }
 }
