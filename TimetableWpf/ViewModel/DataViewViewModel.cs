@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.ComponentModel;
 
 namespace TimetableWpf
 {
@@ -37,46 +38,75 @@ namespace TimetableWpf
                 selectedSubject = value;
                 RaisePropertyChanged("SelectedSubject");
                 OpenChangeDialog.RaiseCanExecuteChanged();
+                RemoveSubject.RaiseCanExecuteChanged();
             }
         }
-        public RelayCommand OpenMessageBox { get; private set; }
         public RelayCommand OpenAddDialog { get; private set; }
         public RelayCommand OpenChangeDialog { get; private set; }
+        public RelayCommand RemoveSubject { get; private set; }
         #endregion
 
         #region Constructor
         public DataViewViewModel()
         {
-            Subjects = new ObservableCollection<Subject>()
-            {
-                new Subject("Математика", 5, 1),
-                new Subject("Русский язык", 6, 2),
-                new Subject("Физика", 4, 2),
-            };
+            Subjects = DataManager.Load<ObservableCollection<Subject>>("Subjects.xml");
             OpenAddDialog = new RelayCommand(OpenAddDialog_Execute);
-            OpenMessageBox = new RelayCommand(OpenMessageBox_Execute);
-            OpenChangeDialog = new RelayCommand(OpenChangeDialog_Execute, OpenChangeDialog_CanExecute);
+            OpenChangeDialog = new RelayCommand(OpenChangeDialog_Execute, () => { return SelectedSubject != null; });
+            RemoveSubject = new RelayCommand(RemoveSubject_Execute, () => { return SelectedSubject != null; });
         }
         #endregion
 
         #region Commands
-        private void OpenMessageBox_Execute()
-        {
-            MessageBox.Show("asdfda");
-        }
         private void OpenAddDialog_Execute()
         {
             View = new SubjectView();
+            View.Window.Closing += UpdateAdd;
             View.ShowView(new SubjectViewViewModel(Subjects));
         }
+
+        private void UpdateAdd(object sender, CancelEventArgs e)
+        {
+            Disponse();
+        }
+
         private void OpenChangeDialog_Execute()
         {
             View = new SubjectView();
+            View.Window.Closing += UpdateChange;
             View.ShowView(new SubjectViewViewModel(SelectedSubject));
         }
-        private bool OpenChangeDialog_CanExecute()
+
+        private void UpdateChange(object sender, CancelEventArgs e)
         {
-            return SelectedSubject != null;
+            List<Subject> collection = new List<Subject>();
+            foreach (var item in Subjects)
+            {
+                collection.Add(item);
+            }
+            Subjects.Clear();
+            foreach (var item in collection)
+            {
+                Subjects.Add(item);
+            }
+            Disponse();
+        }
+
+        private void RemoveSubject_Execute()
+        {
+            foreach (var item in Subjects)
+            {
+                if (item == selectedSubject)
+                {
+                    Subjects.Remove(selectedSubject);
+                    Disponse();
+                    break;
+                }
+            }
+        }
+
+        private void Disponse()
+        {
+            DataManager.Save(Subjects, "Subjects.xml");
         }
         #endregion
     }

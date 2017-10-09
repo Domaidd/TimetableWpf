@@ -69,12 +69,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ISort.cs" />
+    <Compile Include="CustomRelayCommand.cs" />
+    <Compile Include="Model\Classes.cs" />
+    <Compile Include="Services\DataManager.cs" />
     <Compile Include="ViewModel\SubjectViewViewModel.cs" />
     <Compile Include="View\DataView\SubjectView.xaml.cs">
       <DependentUpon>SubjectView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DataView.xaml.cs">
+    <Compile Include="View\DataView\DataView.xaml.cs">
       <DependentUpon>DataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\DataViewViewModel.cs" />
@@ -84,7 +86,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DataView.xaml">
+    <Page Include="View\DataView\DataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

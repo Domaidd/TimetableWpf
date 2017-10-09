@@ -7,9 +7,7 @@ namespace TimetableWpf
     public class Subject
     {
         private string name;
-
         private int hoursPerWeek;
-
         private int hoursPerDay;
 
         public string Name
@@ -17,13 +15,11 @@ namespace TimetableWpf
             get { return name; }
             set { name = value; }
         }
-
         public int HoursPerWeek
         {
             get { return hoursPerWeek; }
             set { hoursPerWeek = value; }
         }
-
         public int HoursPerDay
         {
             get { return hoursPerDay; }
@@ -32,11 +28,15 @@ namespace TimetableWpf
 
         public Subject() { }
 
-        public Subject(string name, int hoursPerWeek, int hoursPerDay)
+        public Subject(string name)
         {
             Name = name;
-            HoursPerWeek = hoursPerDay;
-            HoursPerDay = hoursPerWeek;
+        }
+
+        public Subject(string name, int hoursPerWeek, int hoursPerDay) : this(name)
+        {
+            HoursPerDay = hoursPerDay;
+            HoursPerWeek = hoursPerWeek;
         }
     }
 }

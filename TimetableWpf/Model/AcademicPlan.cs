@@ -8,8 +8,18 @@ namespace TimetableWpf
 {
     public class AcademicPlan
     {
-        public string Name;
+        private string name;
+        private List<Level> levels;
 
-        public Level[] Level;
+        public string Name { get { return name; } set { name = value; } }
+        public List<Level> Levels { get { return levels; } set { levels = value; } }
+
+        public AcademicPlan() { }
+
+        public AcademicPlan(string name, List<Level> levels)
+        {
+            Name = name;
+            Levels = levels;
+        }
     }
 }

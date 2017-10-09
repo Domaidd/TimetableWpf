@@ -16,8 +16,6 @@
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="120" />
@@ -33,26 +31,6 @@
                     Grid.Column="1"
                     Margin="5"
                     Text="{Binding Name}" />
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Margin="5"
-                    Text="Часов в неделю" />
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Margin="5"
-                    Text="{Binding HoursPerWeek}" />
-                <TextBlock
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    Margin="5"
-                    Text="Часов в день" />
-                <TextBox
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    Margin="5"
-                    Text="{Binding HoursPerDay}" />
                 <Button
                     Grid.Row="3"
                     Grid.Column="1"

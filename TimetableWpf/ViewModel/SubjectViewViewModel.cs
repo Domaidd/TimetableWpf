@@ -13,16 +13,12 @@ namespace TimetableWpf
     public class SubjectViewViewModel : ViewModelBase
     {
         private string name;
-        private int hoursPerWeek;
-        private int hoursPerDay;
         private Subject selectedSubject;
+        public ObservableCollection<Subject> subjects;
 
-        public string Name { get { return name; } set { name = value; } }
-        public int HoursPerWeek { get { return hoursPerWeek; } set { hoursPerWeek = value; } }
-        public int HoursPerDay { get { return hoursPerDay; } set { hoursPerDay = value; } }
-        public Subject SelectedSubject { get { return selectedSubject; } set { selectedSubject = value; } }
-
-        public ObservableCollection<Subject> Subjects { get; set; }
+        public string Name { get { return name; } set { name = value; RaisePropertyChanged("Name"); } }
+        public Subject SelectedSubject { get { return selectedSubject; } set { selectedSubject = value; RaisePropertyChanged("SelectedSubject"); } }
+        public ObservableCollection<Subject> Subjects { get { return subjects; } set { subjects = value; RaisePropertyChanged("Subjects"); } }
 
         public RelayCommand AddSubject { get; private set; }
         public RelayCommand ChangeSubject { get; private set; }
@@ -30,9 +26,9 @@ namespace TimetableWpf
         public Visibility IsEnabledAdd { get; set; }
         public Visibility IsEnabledChange { get; set; }
 
-        public SubjectViewViewModel(ObservableCollection<Subject> Subjects)
+        public SubjectViewViewModel(ObservableCollection<Subject> subjects)
         {
-            this.Subjects = Subjects;
+            Subjects = subjects;
             IsEnabledChange = Visibility.Hidden;
             IsEnabledAdd = Visibility.Visible;
             AddSubject = new RelayCommand(AddSubject_Execute);
@@ -41,24 +37,25 @@ namespace TimetableWpf
         public SubjectViewViewModel(Subject selectedSubject)
         {
             Name = selectedSubject.Name;
-            HoursPerDay = selectedSubject.HoursPerDay;
-            HoursPerWeek = selectedSubject.HoursPerWeek;
             SelectedSubject = selectedSubject;
             IsEnabledAdd = Visibility.Hidden;
             IsEnabledChange = Visibility.Visible;
-            ChangeSubject = new RelayCommand(ChangeSubject_Execute);
+            ChangeSubject = new RelayCommand(ChangeSubject_Execute, ChangeSubject_CanExecute);
         }
 
         public void AddSubject_Execute()
         {
-            Subjects.Add(new Subject(Name, HoursPerWeek, HoursPerDay));
+            Subjects.Add(new Subject(Name));
         }
 
         private void ChangeSubject_Execute()
         {
             SelectedSubject.Name = Name;
-            SelectedSubject.HoursPerDay = HoursPerDay;
-            SelectedSubject.HoursPerWeek = hoursPerWeek;
+        }
+
+        private bool ChangeSubject_CanExecute()
+        {
+            return true;
         }
     }
 }

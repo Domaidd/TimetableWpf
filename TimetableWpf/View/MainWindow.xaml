@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:local="clr-namespace:TimetableWpf"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="MainWindow"
@@ -26,7 +27,7 @@
                         <MenuItem Command="{Binding OpenDataView}" Header="Уровни" />
                         <MenuItem Header="Классы" />
                         <MenuItem Header="Преподователи" />
-                        <MenuItem Header="Профели" />
+                        <MenuItem Header="Профили" />
                         <MenuItem Header="Звонки" />
                         <MenuItem Header="Графики" />
                         <MenuItem Header="Изменения" />
@@ -56,10 +57,21 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="80*" />
                                     </Grid.ColumnDefinitions>
-                                    <TreeView Grid.Row="1" Grid.Column="0">
-                                        <TreeViewItem Header="Учебный план">
-                                            <TreeViewItem Header="asdasd" />
-                                        </TreeViewItem>
+                                    <TreeView
+                                        Name="tvMain"
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        ItemsSource="{Binding AcademicPlan}">
+                                        <TreeView.ItemTemplate>
+                                            <HierarchicalDataTemplate ItemsSource="{Binding Levels}">
+                                                <TextBlock Text="{Binding Name}" />
+                                            </HierarchicalDataTemplate>
+                                        </TreeView.ItemTemplate>
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="SelectedItemChanged">
+                                                <i:InvokeCommandAction Command="{Binding SelectedCommand}" CommandParameter="{Binding ElementName=tvMain, Path=SelectedItem}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
                                     </TreeView>
                                     <GridSplitter
                                         Grid.Row="1"
@@ -69,17 +81,20 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Stretch"
                                         ShowsPreview="False" />
-                                    <ListView Grid.Row="1" Grid.Column="2">
+                                    <ListView
+                                        Grid.Row="1"
+                                        Grid.Column="2"
+                                        ItemsSource="{Binding SelectedSubject, UpdateSourceTrigger=PropertyChanged}">
                                         <ListView.View>
                                             <GridView>
-                                                <GridViewColumn Width="Auto">
-                                                    <GridViewColumnHeader Content="Предмет" />
+                                                <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Name}">
+                                                    <GridViewColumnHeader CommandParameter="Name" Content="Предмет" />
                                                 </GridViewColumn>
-                                                <GridViewColumn Width="Auto">
-                                                    <GridViewColumnHeader Content="Часов в неделю" />
+                                                <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding HoursPerWeek}">
+                                                    <GridViewColumnHeader CommandParameter="HoursPerWeek" Content="Часов в неделю" />
                                                 </GridViewColumn>
-                                                <GridViewColumn Width="Auto">
-                                                    <GridViewColumnHeader Content="Часов в день" />
+                                                <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding HoursPerDay}">
+                                                    <GridViewColumnHeader CommandParameter="HoursPerDay" Content="Часов в день" />
                                                 </GridViewColumn>
                                             </GridView>
                                         </ListView.View>
