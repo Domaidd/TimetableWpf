@@ -28,6 +28,7 @@ namespace TimetableWpf
         public ObservableCollection<AcademicPlan> AcademicPlan { get { return academicPlan; } set { academicPlan = value; RaisePropertyChanged("AcademicPlan"); } }
 
         public RelayCommand OpenDataView { get; private set; }
+        public RelayCommand OpenCreatePlanDialog { get; private set; }
         #endregion
 
         #region Constructor
@@ -66,6 +67,7 @@ namespace TimetableWpf
                     })
                 };
             OpenDataView = new RelayCommand(OpenDataView_Execute);
+            OpenCreatePlanDialog = new RelayCommand(OpenCreatePlanDialog_Execute);
         }
         #endregion
 
@@ -74,6 +76,12 @@ namespace TimetableWpf
         {
             View = new DataView();
             View.ShowView(new DataViewViewModel());
+        }
+        
+        private void OpenCreatePlanDialog_Execute()
+        {
+            View = new AcademicPlanView();
+            View.ShowView(new AcademicPlanViewModel(AcademicPlan));
         }
         #endregion
 

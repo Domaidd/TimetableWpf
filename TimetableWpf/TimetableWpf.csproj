@@ -69,19 +69,36 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\MainViewModel\AcademicPlanViewModel.cs" />
+    <Compile Include="View\MainView\AcademicPlanView.xaml.cs">
+      <DependentUpon>AcademicPlanView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Call.cs" />
     <Compile Include="CustomRelayCommand.cs" />
-    <Compile Include="Model\Classes.cs" />
+    <Compile Include="ViewModel\DataViewModel\LevelViewViewModel.cs" />
+    <Compile Include="View\DataView\LevelView.xaml.cs">
+      <DependentUpon>LevelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DataModel\Classes.cs" />
     <Compile Include="Services\DataManager.cs" />
-    <Compile Include="ViewModel\SubjectViewViewModel.cs" />
+    <Compile Include="ViewModel\DataViewModel\SubjectViewViewModel.cs" />
     <Compile Include="View\DataView\SubjectView.xaml.cs">
       <DependentUpon>SubjectView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DataView\DataView.xaml.cs">
       <DependentUpon>DataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\DataViewViewModel.cs" />
+    <Compile Include="ViewModel\DataViewModel\DataViewViewModel.cs" />
     <Compile Include="IView.cs" />
-    <Compile Include="Model\Subject.cs" />
+    <Compile Include="Model\DataModel\Subject.cs" />
+    <Page Include="View\MainView\AcademicPlanView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DataView\LevelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DataView\SubjectView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -90,7 +107,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainWindow.xaml">
+    <Page Include="View\MainView\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -99,9 +116,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Level.cs" />
-    <Compile Include="ViewModel\MainViewViewModel.cs" />
-    <Compile Include="View\MainWindow.xaml.cs">
+    <Compile Include="Model\DataModel\Level.cs" />
+    <Compile Include="ViewModel\MainViewModel\MainViewViewModel.cs" />
+    <Compile Include="View\MainView\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>

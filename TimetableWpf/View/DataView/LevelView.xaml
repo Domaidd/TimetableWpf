@@ -1,0 +1,53 @@
+﻿<Window
+    x:Class="TimetableWpf.LevelView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TimetableWpf"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="LevelView"
+    ResizeMode="NoResize"
+    SizeToContent="WidthAndHeight"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Grid>
+        <StackPanel Margin="5">
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="120" />
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="5"
+                    Text="Название уровня" />
+                <TextBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="5"
+                    Text="{Binding Name}" />
+                <Button
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Width="70"
+                    Margin="5"
+                    Command="{Binding AddLevel}"
+                    Content="Добавить"
+                    Visibility="{Binding IsEnabledAdd}" />
+                <Button
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Width="70"
+                    Margin="5"
+                    Command="{Binding ChangeLevel}"
+                    Content="Изменить"
+                    Visibility="{Binding IsEnabledChange}" />
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

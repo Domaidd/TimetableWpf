@@ -15,9 +15,24 @@ namespace TimetableWpf
         public bool Selected { get { return selected; } set { selected = value; } }
 
         public Level() { }
-        public Level(string name, List<Subject> subjects)
+
+        public Level(string name)
         {
             Name = name;
+        }
+
+        public Level(string name, List<Subject> subjects) : this(name)
+        {
+            Subjects = subjects;
+        }
+
+        public Level(string name, List<Classes> classes) : this(name)
+        {
+            Classes = classes;
+        }
+
+        public Level(string name, List<Subject> subjects, List<Classes> classes) : this (name, classes)
+        {
             Subjects = subjects;
         }
     }
